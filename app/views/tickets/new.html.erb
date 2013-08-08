@@ -1,0 +1,20 @@
+<h2>New Ticket</h2>
+
+<%= form_for(@ticket) do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject %>
+  </p>
+
+  <p>
+    <%= f.label :message %><br>
+    <%= f.text_field :message %>
+  </p>
+
+  <%= f.submit %>
+<% end %>
