@@ -10,7 +10,7 @@ end
 
 def create
   @ticket = Ticket.create(params[:ticket])
-  if @ticket.valid?
+  if @ticket.save
     flash[:notice] = "Ticket successfully created."
     HelpDeskMailer.help_desk_mailer(@ticket).deliver
     redirect_to tickets_path

@@ -1,1 +1,8 @@
 <%= link_to "Create Ticket", new_ticket_path %>
+
+<% @tickets.each do |ticket| %>
+  <h3><%= ticket.name %>: <%= ticket.subject %>: <%= ticket.message %></h3><br>
+  <% if ticket.helpdesk_response %>
+    <p><%= ticket.helpdesk_response %> </p>
+  <% end %>
+<% end %>
