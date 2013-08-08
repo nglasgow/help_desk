@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
 
 def index
-
+  @tickets = Ticket.all
 end
 
 def new
@@ -9,13 +9,20 @@ def new
 end
 
 def create
-  @ticket = Ticket.new(params[:ticket])
-    if @ticket.save
-      HelpDeskMailer.help_desk_mailer.ticket(@ticket).deliver
-      redirect_to @ticket, notice: "Ticket has been submitted"
-    else
-      render :new
+  @ticket = Ticket.create(params[:ticket])
+  if @ticket.valid?
+    flash[:notice] = "Ticket successfully created."
+    HelpDeskMailer.help_desk_mailer(@ticket).deliver
+    redirect_to tickets_path
+  else
+    flash[:alert] = "Ticket has not been created."
+    render action: :new
     end
   end
+
+  def show
+    @ticket = Ticket.find(params[:ticket])
+  end
 end
+
 
